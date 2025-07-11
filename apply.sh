@@ -3,6 +3,7 @@
 cd ./terraform
 
 # Generate inventory file
+terraform init
 terraform apply -auto-approve
 terraform output -json > tf_output.json
 
