@@ -21,13 +21,23 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
-resource "aws_subnet" "public_subnet" {
+resource "aws_subnet" "public_subnet-1" {
   vpc_id                  = aws_vpc.main_vpc.id
   cidr_block              = "12.0.1.0/24"
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "public_subnet"
+    Name = "public_subnet-1"
+  }
+}
+
+resource "aws_subnet" "public_subnet-2" {
+  vpc_id                  = aws_vpc.main_vpc.id
+  cidr_block              = "12.0.2.0/24"
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name = "public_subnet-2"
   }
 }
 
@@ -44,8 +54,13 @@ resource "aws_route_table" "public_rt" {
   }
 }
 
-resource "aws_route_table_association" "rt_assoc_public" {
-  subnet_id      = aws_subnet.public_subnet.id
+resource "aws_route_table_association" "rt_assoc_public-1" {
+  subnet_id      = aws_subnet.public_subnet-1.id
+  route_table_id = aws_route_table.public_rt.id
+}
+
+resource "aws_route_table_association" "rt_assoc_public-2" {
+  subnet_id      = aws_subnet.public_subnet-2.id
   route_table_id = aws_route_table.public_rt.id
 }
 
@@ -108,7 +123,7 @@ resource "aws_security_group" "web_sg" {
 resource "aws_instance" "web-app-1" {
   ami                    = var.instance_ami
   instance_type          = "t3.micro"
-  subnet_id              = aws_subnet.public_subnet.id
+  subnet_id              = aws_subnet.public_subnet-1.id
   vpc_security_group_ids = [aws_security_group.web_sg.id]
   key_name               = "ec2-testing-key"
 
@@ -119,7 +134,7 @@ resource "aws_instance" "web-app-1" {
 resource "aws_instance" "web-app-2" {
   ami                    = var.instance_ami
   instance_type          = "t3.micro"
-  subnet_id              = aws_subnet.public_subnet.id
+  subnet_id              = aws_subnet.public_subnet-2.id
   vpc_security_group_ids = [aws_security_group.web_sg.id]
   key_name               = "ec2-testing-key"
 
@@ -130,7 +145,7 @@ resource "aws_instance" "web-app-2" {
 resource "aws_instance" "web-app-3" {
   ami                    = var.instance_ami
   instance_type          = "t3.micro"
-  subnet_id              = aws_subnet.public_subnet.id
+  subnet_id              = aws_subnet.public_subnet-1.id
   vpc_security_group_ids = [aws_security_group.web_sg.id]
   key_name               = "ec2-testing-key"
 
@@ -141,7 +156,7 @@ resource "aws_instance" "web-app-3" {
 resource "aws_instance" "web-app-4" {
   ami                    = var.instance_ami
   instance_type          = "t3.micro"
-  subnet_id              = aws_subnet.public_subnet.id
+  subnet_id              = aws_subnet.public_subnet-2.id
   vpc_security_group_ids = [aws_security_group.web_sg.id]
   key_name               = "ec2-testing-key"
 
