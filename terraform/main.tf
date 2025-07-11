@@ -105,7 +105,7 @@ resource "aws_security_group" "web_sg" {
   }
 }
 
-resource "aws_instance" "my_server-1" {
+resource "aws_instance" "web-app-1" {
   ami                    = var.instance_ami
   instance_type          = "t3.micro"
   subnet_id              = aws_subnet.public_subnet.id
@@ -116,7 +116,7 @@ resource "aws_instance" "my_server-1" {
     Name = "web-server-1"
   }
 }
-resource "aws_instance" "my_server-2" {
+resource "aws_instance" "web-app-2" {
   ami                    = var.instance_ami
   instance_type          = "t3.micro"
   subnet_id              = aws_subnet.public_subnet.id
@@ -127,7 +127,7 @@ resource "aws_instance" "my_server-2" {
     Name = "web-server-2"
   }
 }
-resource "aws_instance" "my_server-3" {
+resource "aws_instance" "web-app-3" {
   ami                    = var.instance_ami
   instance_type          = "t3.micro"
   subnet_id              = aws_subnet.public_subnet.id
@@ -138,7 +138,7 @@ resource "aws_instance" "my_server-3" {
     Name = "web-server-3"
   }
 }
-resource "aws_instance" "my_server-4" {
+resource "aws_instance" "web-app-4" {
   ami                    = var.instance_ami
   instance_type          = "t3.micro"
   subnet_id              = aws_subnet.public_subnet.id
