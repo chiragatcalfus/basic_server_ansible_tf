@@ -2,45 +2,6 @@
 - name: Deploy Nginx Docker container on all servers
   hosts: web_servers
   become: true
-  tasks:
-
-    - name: Install Docker dependencies
-      apt:
-        name:
-          - apt-transport-https
-          - ca-certificates
-          - curl
-          - software-properties-common
-        state: present
-        update_cache: true
-
-    - name: Add Docker GPG key
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
-
-    - name: Add Docker repository
-      apt_repository:
-        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release | lower }} stable"
-        state: present
-
-    - name: Install Docker CE
-      apt:
-        name: docker-ce
-        state: present
-        update_cache: true
-
-    - name: Ensure Docker service is running
-      service:
-        name: docker
-        state: started
-        enabled: true
-
-    - name: Run Nginx container mapped to port 80
-      docker_container:
-        name: nginx
-        image: nginx:latest
-        state: started
-        restart_policy: always
-        published_ports:
-          - "80:80"
+  roles:
+    - nginx
+    
