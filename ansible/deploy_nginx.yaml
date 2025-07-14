@@ -3,5 +3,6 @@
   hosts: web_servers
   become: true
   roles:
-    - nginx
+    # - chiragatcalfus.docker_nginx_port80_ansibleRole
+    - nginx_ansibleRole
     
