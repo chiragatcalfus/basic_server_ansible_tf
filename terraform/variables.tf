@@ -8,3 +8,7 @@ variable "instance_ami" {
   description = "aws ami for instance"
   type = string
 }
+
+variable "instance_type" {
+  type = string
+}
