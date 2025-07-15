@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nginx Deployed via Ansible</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header>
+    <h1>🚀 Deployment Successful</h1>
+    <p>Welcome to your Nginx container deployed with Ansible, Docker, and Terraform.</p>
+  </header>
+
+  <main>
+    <section class="summary-card">
+      <h2>Deployment Info</h2>
+      <ul>
+        <li><strong>Environment:</strong> Production</li>
+        <li><strong>Deployed By:</strong> Ansible</li>
+        <li><strong>Container:</strong> nginx:latest</li>
+        <li><strong>Date:</strong> <span id="build-date"></span></li>
+      </ul>
+    </section>
+
+    <section class="card-grid">
+      <div class="card">
+        <h3>Uptime</h3>
+        <p>99.99%</p>
+      </div>
+      <div class="card">
+        <h3>Version</h3>
+        <p>v1.0.0</p>
+      </div>
+      <div class="card">
+        <h3>Status</h3>
+        <p style="color: green;">Running</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 DevOps Portal by Chirag</p>
+  </footer>
+
+  <script>
+    // Simple client-side JS to inject current time
+    document.getElementById('build-date').innerText = new Date().toLocaleString();
+  </script>
+</body>
+</html>
