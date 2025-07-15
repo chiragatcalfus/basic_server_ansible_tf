@@ -2,6 +2,7 @@
 - name: Deploy Nginx Docker container on all servers
   hosts: web_servers
   become: true
+  serial: 1
   roles:
     # - chiragatcalfus.docker_nginx_port80_ansibleRole
     - nginx_ansibleRole

@@ -37,10 +37,10 @@ elif [[ $PLAN_EXIT_CODE -eq 2 ]]; then
     done
 
     echo "
-        [web_servers:vars]
-        ansible_user=ubuntu
-        ansible_ssh_private_key_file=~/.ssh/ec2-testing-key.pem
-        ansible_ssh_common_args=-o StrictHostKeyChecking=no -o IdentitiesOnly=yes " >> ../ansible/inventory.ini
+[web_servers:vars]
+ansible_user=ubuntu
+ansible_ssh_private_key_file=~/.ssh/ec2-testing-key.pem
+ansible_ssh_common_args=-o StrictHostKeyChecking=no -o IdentitiesOnly=yes " >> ../ansible/inventory.ini
 
     echo "Ansible inventory generated at ../ansible/inventory.ini"
     echo "Waiting for the system checks to complete for the aws instances"
