@@ -108,6 +108,13 @@ resource "aws_security_group" "web_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -165,48 +172,48 @@ resource "aws_instance" "web-app-4" {
   }
 }
 
-resource "aws_launch_template" "web_template"{
-  name_prefix = "web-template-"
-  image_id = var.instance_ami
-  instance_type = var.instance_type
-  key_name = "ec2-testing-key"
+# resource "aws_launch_template" "web_template"{
+#   name_prefix = "web-template-"
+#   image_id = var.instance_ami
+#   instance_type = var.instance_type
+#   key_name = "ec2-testing-key"
 
-  network_interfaces {
+#   network_interfaces {
     
-  }
+#   }
 
-  tag_specifications {
+#   tag_specifications {
     
-  }
-  
-}
+#   }
 
-resource "aws_autoscaling_group" "web_asg" {
-  desired_capacity = 2
-  max_size = 4
-  min_size = 2
-  vpc_zone_identifier = [ aws_subnet.public_subnet-1, aws_subnet.public_subnet-2 ]
-  health_check_type = "EC2"
+# }
 
-  launch_template {
-    id = aws_launch_template.web_template.id
-  }
-}
+# resource "aws_autoscaling_group" "web_asg" {
+#   desired_capacity = 2
+#   max_size = 4
+#   min_size = 2
+#   vpc_zone_identifier = [ aws_subnet.public_subnet-1, aws_subnet.public_subnet-2 ]
+#   health_check_type = "EC2"
 
-resource "aws_autoscaling_policy" "scale_up" {
-  name = "scale-up-policy"
-  scaling_adjustment = 1
-  adjustment_type = "ChangeInCapacity"
-  cooldown = 300
-  autoscaling_group_name = aws_autoscaling_group.web_asg.name
-}
+#   launch_template {
+#     id = aws_launch_template.web_template.id
+#   }
+# }
 
-resource "aws_autoscaling_policy" "scale_up" {
-  name = "scale-up-policy"
-  scaling_adjustment = -1
-  adjustment_type = "ChangeInCapacity"
-  cooldown = 300
-  autoscaling_group_name = aws_autoscaling_group.web_asg.name
-}
+# resource "aws_autoscaling_policy" "scale_up" {
+#   name = "scale-up-policy"
+#   scaling_adjustment = 1
+#   adjustment_type = "ChangeInCapacity"
+#   cooldown = 300
+#   autoscaling_group_name = aws_autoscaling_group.web_asg.name
+# }
+
+# resource "aws_autoscaling_policy" "scale_up" {
+#   name = "scale-up-policy"
+#   scaling_adjustment = -1
+#   adjustment_type = "ChangeInCapacity"
+#   cooldown = 300
+#   autoscaling_group_name = aws_autoscaling_group.web_asg.name
+# }
 
 
